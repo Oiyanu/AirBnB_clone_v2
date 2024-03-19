@@ -8,7 +8,7 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    def all(self, cla+None):
+    def all(self, cls=None):
         """
         Args:
             cls: class type of an object
