@@ -14,7 +14,7 @@ class BaseModel:
     """A base class for all hbnb models"""
 
     id = Column(String(60), unique=True, nullable=False,
-            primary_key=True)
+                primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
@@ -35,7 +35,7 @@ class BaseModel:
                 setattr(self, "updated_at", time)
         else:
             self.id = str(uuid.uuid4())
-            self.craeted_at = self.updated_at = datetime.now()
+            self.created_at = self.updated_at = datetime.now()
 
     def __str__(self):
         """Returns a string representation of the instance"""
