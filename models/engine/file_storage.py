@@ -18,12 +18,9 @@ class FileStorage:
             else a dictionary of all objects
         """
         if cls:
-            new_dict = {}
-            for key, value in FileStorage.__objects.items():
-                if isinstance(value, cls):
-                    new_dict[key] = value
-            return new_dict
-        return FileStorage.__objects
+            return {key: obj for (key, obj)
+                    in self.__objects.items() if isinstance(obj, cls)}
+        return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
