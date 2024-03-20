@@ -21,7 +21,7 @@ if getenv("HBNB_TYPE_STORAGE") == "db":
                           Column('amenities_id',
                                  String(60),
                                  ForeignKey('amenities.id'),
-                                 primary_key=True, nullable=False)
+                                 primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -50,13 +50,13 @@ class Place(BaseModel, Base):
         def reviews(self):
             """Getter attribute file storage"""
             return [review for review in models.storage.all(Review)
-                if review.place_id == self.id]
+                    if review.place_id == self.id]
 
         @property
         def amenities(self):
             """Getter attributes file storage"""
             return [amenity for amenity in models.storage.all(Amenity)
-                if amenity.id in self.amenity_ids]
+                    if amenity.id in self.amenity_ids]
 
         @amenities.setter
         def amenities(self, obj):
