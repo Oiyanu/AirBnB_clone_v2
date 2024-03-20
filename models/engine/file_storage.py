@@ -69,8 +69,12 @@ class FileStorage:
         Args:
             obj: object to be deleted
         """
-        try:
-            key = obj.to_dict()['__class__'] + '.' + obj.id
-            del FileStorage.__objects[key]
-        except (AttributeError, KeyError):
-            pass
+        if obj:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            if (key, obj) in self.__objects.items():
+                self.__objects.pop(key, None)
+        self.save()
+
+    def close(self):
+        """Deserializes the JSON file"""
+        self.reload()
