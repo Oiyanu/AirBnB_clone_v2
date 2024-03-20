@@ -39,7 +39,7 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representation of the instance"""
-        dictionaty = self.to_dict()
+        dictionary = self.to_dict()
         return '[{}] ({}) {}'.format(
                 type(self).__name__, self.id, dictionary)
 
