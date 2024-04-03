@@ -33,7 +33,7 @@ echo "<html>
 	<body>
 		Welcome to the home page
 	</body>
-</html>" > /data/web_static/releases/test/idex.html
+</html>" > /data/web_static/releases/test/index.html
 
 
 #Create symlink
