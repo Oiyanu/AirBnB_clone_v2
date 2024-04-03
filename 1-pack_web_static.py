@@ -19,7 +19,7 @@ def do_pack():
 
     result = local("tar -czvf versions/{} web_static".format(archive_name))
 
-    if rseult.succeeded:
+    if result.succeeded:
         return "version/" + archive_name
     else:
         return None
