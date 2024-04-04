@@ -1,58 +1,27 @@
 #!/usr/bin/env bash
-# This script sets up a web server for deploying static web content
+# script that sets up web servers for the deployment of web_static
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 
-#installing nginx
-apt-get -y update
-apt-get -y install nginx
-#set nginx to listen on port 80
-ufw allow 'Nginx HTTP'
-# set up nginx default landing page
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo mkdir -p /data/
+sudo mkdir -p /data/web_static/
+sudo mkdir -p /data/web_static/releases/
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
+sudo touch /data/web_static/releases/test/index.html
+sudo echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" | sudo tee /data/web_static/releases/test/index.html
 
+sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
 
-# Create directories
-paths=(
-	"/data/"
-	"/data/web_static/"
-	"/data/web_static/releases/"
-	"/data/web_static/shared/"
-	"/data/web_static/releases/test/"
-)
-for path in "${paths[@]}"
-do
-	if [[ ! -d "$path" ]]; then
-		mkdir -p "$path"
-	fi
-done
+sudo chown -R ubuntu:ubuntu /data/
 
+sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default
 
-touch /data/web_static/releases/test/index.html
-echo "<html>
-	<head>
-	</head>
-	<body>
-		Welcome to the home page
-	</body>
-</html>" > /data/web_static/releases/test/index.html
-
-
-#Create symlink
-link_path="/data/web_static/current"
-target_path="/data/web_static/releases/test/"
-if [[ -L "$link_path" ]]; then
-	rm "$link_path"
-fi
-ln -s "$target_path" "$link_path"
-
-
-chown -R ubuntu:ubuntu /data/
-
-
-if ! grep -q "location localhost/hbnb_static {" /etc/nginx/sites-available/default; then
-	sed -i "/error_page 404 \/404.html;/a \\\n\tlocation /hbnb_static { \
-		\n\t\talias /data/web_static/current/; \
-		\n\t\tautoindex off; \
-		\n\t}" /etc/nginx/sites-available/default
-fi
-
-service nginx restart
+sudo service nginx restart
