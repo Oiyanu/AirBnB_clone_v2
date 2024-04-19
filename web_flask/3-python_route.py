@@ -22,7 +22,7 @@ def hbnb():
 def display_c(text):
     """ Returns message to be displayed """
     processed_text = text.replace("_", " ")
-    return f"C processed_text}"
+    return f"C {processed_text}"
 
 
 @app.route("/python/", strict_slashes=False)
