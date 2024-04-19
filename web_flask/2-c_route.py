@@ -18,10 +18,10 @@ def hbnb():
     return "HBNB"
 
 
-@app.route("/c/<text>", strct_slashes=False)
+@app.route("/c/<text>", strict_slashes=False)
 def display_c(text):
     """ Returns message to be displayed """
-    processed_text = text.replace("-", " ")
+    processed_text = text.replace("_", " ")
     return f"C {processed_text}"
 
 
