@@ -22,7 +22,7 @@ def hbnb():
 def display_c(text):
     """ Returns message to be displayed """
     processed_text = text.replace("_", " ")
-    return f"C processed_text}"
+    return f"C {processed_text}"
 
 
 @app.route("/python/", strict_slashes=False)
@@ -33,7 +33,7 @@ def display_python(text="is cool"):
     return f"Python {processed_text}"
 
 
-@app.route("/number/<it:n>", strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
     """ Returns message to be displayed """
     return f"{n} is a number"
