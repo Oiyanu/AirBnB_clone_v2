@@ -2,18 +2,17 @@
 """ This script starts a Flask web application """
 
 from flask import Flask
-
 app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
 def display():
     """ Returns message to be displayed """
-    return "Hello HBNB"
+    return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
-def display_hbnb():
+def hbnb():
     """ Returns message to be displayed """
     return "HBNB"
 
