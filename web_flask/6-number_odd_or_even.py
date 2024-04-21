@@ -1,4 +1,5 @@
-#!/usr/bin/python3                                                  fro""" This script starts a Flask web application """
+#!/usr/bin/python3
+""" This script starts a Flask web application """
 
 from flask import Flask, render_template
 
